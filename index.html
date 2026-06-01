@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cruz Digital – Cybersecurity &amp; Tech Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #060C14;
+    --surface: #0D1826;
+    --surface2: #112033;
+    --accent: #00D4FF;
+    --accent2: #00FF9C;
+    --danger: #FF4D6D;
+    --text: #E8F4FF;
+    --muted: #6B8BAA;
+    --border: rgba(0,212,255,0.15);
+    --mono: 'Space Mono', monospace;
+    --sans: 'Sora', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRID LINES BG ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(6,12,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent2); }
+  nav ul {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  nav ul a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--accent); }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--bg); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    border: 1px solid rgba(0,255,156,0.3);
+    padding: 0.3rem 1rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    max-width: 820px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  h1 .hl { color: var(--accent); }
+  h1 .hl2 { color: var(--accent2); }
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 580px;
+    font-weight: 300;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-certs {
+    margin-top: 2rem;
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .cert-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(0,212,255,0.07);
+    border: 1px solid rgba(0,212,255,0.2);
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .hero-btns {
+    margin-top: 2.5rem;
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .btn-primary {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-outline {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--text); color: var(--text); }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .stat-item {
+    padding: 1.8rem 3rem;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    flex: 1; min-width: 140px;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 1.8rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative; z-index: 1;
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .section-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+
+  /* ─── SERVICES GRID ─── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .service-card {
+    background: var(--surface);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--surface2); }
+  .service-card:hover::before { background: var(--accent); }
+  .service-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    color: var(--accent);
+    font-size: 1.4rem;
+  }
+  .service-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    font-family: var(--mono);
+    color: var(--text);
+  }
+  .service-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .service-list {
+    margin-top: 0.8rem;
+    list-style: none;
+  }
+  .service-list li {
+    font-size: 0.82rem;
+    color: var(--muted);
+    padding: 0.2rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .service-list li::before {
+    content: '›';
+    position: absolute; left: 0;
+    color: var(--accent2);
+  }
+
+  /* ─── ABOUT ─── */
+  .about-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  @media (max-width: 700px) {
+    .about-wrap { grid-template-columns: 1fr; }
+  }
+  .about-terminal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+  }
+  .terminal-bar {
+    background: var(--surface2);
+    padding: 0.6rem 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #FF5F57; }
+  .dot.y { background: #FFBD2E; }
+  .dot.g { background: #28CA41; }
+  .terminal-body { padding: 1.5rem; line-height: 2; }
+  .t-prompt { color: var(--accent2); }
+  .t-cmd { color: var(--text); }
+  .t-out { color: var(--muted); padding-left: 1rem; display: block; }
+  .t-accent { color: var(--accent); }
+  .about-info h2 { margin-bottom: 1rem; }
+  .about-info p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+  .skills-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;
+  }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+    background: rgba(0,255,156,0.07);
+    border: 1px solid rgba(0,255,156,0.2);
+    color: var(--accent2);
+    letter-spacing: 1px;
+  }
+
+  /* ─── WHY ─── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .why-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .why-num {
+    font-family: var(--mono);
+    font-size: 2rem;
+    color: rgba(0,212,255,0.15);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .why-card h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--text);
+  }
+  .why-card p { font-size: 0.83rem; color: var(--muted); }
+
+  /* ─── CONTACT ─── */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 700px) {
+    .contact-wrap { grid-template-columns: 1fr; }
+  }
+  .contact-info h2 { margin-bottom: 1rem; }
+  .contact-info p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .contact-item .icon {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 1rem; flex-shrink: 0;
+  }
+  form { display: flex; flex-direction: column; gap: 1rem; }
+  input, textarea, select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.8rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+  }
+  input::placeholder, textarea::placeholder {
+    color: var(--muted);
+  }
+  select option { background: var(--surface); color: var(--text); }
+  textarea { height: 120px; }
+  .submit-btn {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-weight: 700;
+    align-self: flex-start;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: var(--accent2); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: var(--surface);
+  }
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: 0.8rem; color: var(--muted);
+    text-decoration: none; letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ─── DIVIDER ─── */
+  .full-divider {
+    position: relative; z-index: 1;
+    height: 1px; background: var(--border);
+    max-width: 100%; margin: 0;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── MOBILE NAV ─── */
+  @media (max-width: 700px) {
+    nav ul { display: none; }
+    .nav-cta { display: none; }
+    h1 { font-size: 2rem; }
+  }
+
+  /* ─── SCAN LINE ANIMATION ─── */
+  @keyframes scan {
+    0% { top: -2px; }
+    100% { top: 100%; }
+  }
+  .scan-wrap {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  }
+  .scan-line {
+    position: absolute; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+    animation: scan 6s linear infinite;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#hero">CRUZ<span>DIGITAL</span></a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about-me">About Me</a></li>
+    <li><a href="#why-me">Why Me?</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Contact Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-glow"></div>
+  <div class="scan-wrap"><div class="scan-line"></div></div>
+
+  <div class="badge">// CYBERSECURITY · SOFTWARE · SURVEILLANCE</div>
+  <h1>
+    Enterprise-grade security<br>
+    <span class="hl">built by an expert</span>,<br>
+    scaled for <span class="hl2">your budget</span>
+  </h1>
+  <p class="hero-sub">
+    MSc. Cybersecurity · Bachelor's in Systems Engineering · ISO 27001/27002 · D-Link Advanced Certified. 10+ years of real-world IT management, software development, and network security experience.
+  </p>
+  <div class="hero-certs">
+    <span class="cert-tag">MSc Cybersecurity – CEUPE</span>
+    <span class="cert-tag">ISO Certified</span>
+    <span class="cert-tag">B.S. Systems Engineering – UCNE</span>
+    <span class="cert-tag">D-Link Adv. Certified (DAC)</span>
+  </div>
+  <div class="hero-btns">
+    <a class="btn-primary" href="#contact">Request Free Consultation</a>
+    <a class="btn-outline" href="#services">View Services</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">10K+</div>
+    <div class="stat-label">Customers Protected</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">55</div>
+    <div class="stat-label">Stores Led</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">+10</div>
+    <div class="stat-label">Years of Experience</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">// 01. SERVICES</div>
+  <h2>Complete solutions<br>for your security</h2>
+  <p class="section-desc">Specialized services for small businesses and individuals. Enterprise-grade technology within your reach.</p>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <h3>Cybersecurity</h3>
+      <p>Comprehensive protection of your systems and data against modern digital threats.</p>
+      <ul class="service-list">
+        <li>Windows Defender 365 – installation and configuration</li>
+        <li>Advanced enterprise antivirus</li>
+        <li>Firewall and access control</li>
+        <li>Anti-spam and anti-phishing</li>
+        <li>Security audit</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📷</div>
+      <h3>Physical Security &amp; Surveillance</h3>
+      <p>Monitoring systems and alarms to protect your physical facilities.</p>
+      <ul class="service-list">
+        <li>CCTV security camera installation</li>
+        <li>Cloud and local recording setup</li>
+        <li>Motion and door/window sensors</li>
+        <li>Alarm systems with notifications</li>
+        <li>Remote monitoring from your phone</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Web Development</h3>
+      <p>Modern, fast, and secure websites for individuals and businesses.</p>
+      <ul class="service-list">
+        <li>Personal and business landing pages</li>
+        <li>Sites with online store</li>
+        <li>Responsive design (mobile and desktop)</li>
+        <li>SEO and speed optimization</li>
+        <li>Maintenance and updates</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">💻</div>
+      <h3>Application Development</h3>
+      <p>Custom applications for your business: web, desktop, and mobile.</p>
+      <ul class="service-list">
+        <li>Web applications (SaaS, dashboards)</li>
+        <li>Desktop apps for Windows/Mac</li>
+        <li>iOS and Android mobile applications</li>
+        <li>Business management systems</li>
+        <li>API and third-party integration</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ABOUT -->
+<section id="about-me">
+  <div class="about-wrap">
+    <div class="about-terminal">
+      <div class="terminal-bar">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <span style="margin-left:0.5rem;font-size:0.75rem;color:var(--muted);">profile.sh</span>
+      </div>
+      <div class="terminal-body">
+        <span class="t-prompt">$ </span><span class="t-cmd">whoami</span><br>
+        <span class="t-out">→ B.S. Systems Engineering – UCNE, D.R.</span>
+        <span class="t-out">→ MSc. Cybersecurity – CEUPE, Spain</span><br>
+
+        <span class="t-prompt">$ </span><span class="t-cmd">certifications --list</span><br>
+        <span class="t-out t-accent">→ ISO 27001 / 27002 ✓</span>
+        <span class="t-out t-accent">→ D-Link Advanced Certification (DAC) ✓</span><br>
+
+        <span class="t-prompt">$ </span><span class="t-cmd">specialties --show</span><br>
+        <span class="t-out">→ Network Security</span>
+        <span class="t-out">→ Endpoint Protection</span>
+        <span class="t-out">→ Surveillance Systems</span>
+        <span class="t-out">→ Full-Stack Development</span><br>
+
+        <span class="t-prompt">$ </span><span class="t-cmd">status</span><br>
+        <span class="t-out t-accent">→ Based in Houston, TX · Bilingual EN/ES ●</span>
+      </div>
+    </div>
+
+    <div class="about-info">
+      <div class="section-label">// 02. ABOUT ME</div>
+      <h2>Real experience,<br>concrete results</h2>
+      <p>
+        I'm Lwismar Cruz — a Systems Engineer and Cybersecurity MSc. with over 10 years of hands-on IT experience spanning network security, software development, and technology management across the Dominican Republic, Spain, and the United States.
+      </p>
+      <p>
+        I have led a franchise network of 55 stores with 342 employees, securing networks for thousands of customers, and delivered full-lifecycle software projects. I now bring that enterprise expertise directly to small businesses and individuals — at a price that makes sense.
+      </p>
+      <div class="skills-tags">
+        <span class="skill-tag">Windows Defender</span>
+        <span class="skill-tag">Firewall</span>
+        <span class="skill-tag">CCTV</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">iOS / Android</span>
+        <span class="skill-tag">ISO 27001</span>
+        <span class="skill-tag">Networks</span>
+        <span class="skill-tag">SQL / MySQL</span>
+        <span class="skill-tag">Java · C · C++</span>
+        <span class="skill-tag">C# · Python</span>
+        <span class="skill-tag">Dealertrack</span>
+        <span class="skill-tag">Bilingual EN/ES</span>
+        <span class="skill-tag">Project Management</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- WHY -->
+<section id="why-me">
+  <div class="section-label">// 03. WHY ME?</div>
+  <h2>What sets me apart</h2>
+  <p class="section-desc">I am not an anonymous company. I am a professional who works directly with you.</p>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <h4>Personalized service</h4>
+      <p>I work directly with you — no middlemen. As a former General Manager overseeing 342 employees, I know how to listen, diagnose, and deliver.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">02</div>
+      <h4>Verified credentials</h4>
+      <p>MSc. in Cybersecurity (CEUPE, Spain), B.S. in Systems Engineering, ISO 27001/27002, and D-Link Advanced Certification — real academic and industry credentials.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <h4>Affordable pricing</h4>
+      <p>I've led large-scale networks and secured thousands of customers. Now I apply that same enterprise approach to businesses of any size.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">04</div>
+      <h4>Ongoing support</h4>
+      <p>I don't disappear after delivery. Bilingual (English/Spanish) support available whenever you need it.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">05</div>
+      <h4>One single provider</h4>
+      <p>Full-stack development, network security, CCTV, and web — all from one professional with 10+ years of cross-industry IT experience.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">06</div>
+      <h4>Free consultation</h4>
+      <p>First consultation at no cost. I've secured networks for thousands of customers — let me put that experience to work for you, obligation-free.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <div class="section-label">// 04. CONTACT</div>
+      <h2>Let's talk about<br>your project</h2>
+      <p>Based in Houston, TX and available for remote work nationwide. Whether you need network hardening, a secure website, a custom app, or a CCTV system — reach out and I'll get back to you the same day.</p>
+      <div class="contact-item">
+        <div class="icon">🕐</div>
+        <span>Response within 24 hours</span>
+      </div>
+    </div>
+
+    <form onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="Your name" required />
+      <input type="email" placeholder="Your email address" required />
+      <select>
+        <option value="" disabled selected>Select a service</option>
+        <option>Cybersecurity</option>
+        <option>Cameras and surveillance</option>
+        <option>Web development</option>
+        <option>Mobile / desktop application</option>
+        <option>General inquiry</option>
+      </select>
+      <textarea placeholder="Tell me about your project or issue..."></textarea>
+      <button class="submit-btn" type="submit">→ Send message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 Cruz Digital · cruz-digital.com — All rights reserved</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#about-me">About Me</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init('nS8jFnnXVgjm6TPkA');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.submit-btn');
+    const name = form.querySelector('input[type="text"]').value;
+    const email = form.querySelector('input[type="email"]').value;
+    const service = form.querySelector('select').value;
+    const message = form.querySelector('textarea').value;
+
+    btn.textContent = '⏳ Sending...';
+    btn.disabled = true;
+
+    emailjs.send('service_kc0gqek', 'template_qph0uba', {
+      from_name: name,
+      from_email: email,
+      service: service,
+      message: message,
+      to_email: 'lwismar@outlook.com'
+    }).then(() => {
+      btn.textContent = '✓ Message sent!';
+      btn.style.background = 'var(--accent2)';
+      form.reset();
+      setTimeout(() => {
+        btn.textContent = '→ Send message';
+        btn.style.background = 'var(--accent)';
+        btn.disabled = false;
+      }, 4000);
+    }).catch(() => {
+      btn.textContent = '✗ Error — try again';
+      btn.style.background = 'var(--danger)';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.textContent = '→ Send message';
+        btn.style.background = 'var(--accent)';
+      }, 3000);
+    });
+  }
+</script>
+
+</body>
+</html>

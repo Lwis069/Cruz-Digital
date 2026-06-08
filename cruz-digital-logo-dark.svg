@@ -1,0 +1,7 @@
+<svg id="logo-full-dark" width="240" height="64" viewBox="0 0 240 64" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="32,4 56,18 56,46 32,60 8,46 8,18" fill="none" stroke="#4A9FE0" stroke-width="2.5"/>
+          <polygon points="32,13 48,22 48,42 32,51 16,42 16,22" fill="#4A9FE0" opacity="0.18"/>
+          <path d="M24 32 L29 37 L40 26" fill="none" stroke="#4A9FE0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="74" y="28" font-family="sans-serif" font-size="22" font-weight="600" fill="#ffffff" letter-spacing="-0.5">Cruz</text>
+          <text x="74" y="50" font-family="sans-serif" font-size="14" font-weight="400" fill="#4A9FE0" letter-spacing="3">DIGITAL</text>
+        </svg>
